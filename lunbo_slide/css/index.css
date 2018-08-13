@@ -1,0 +1,64 @@
+/* cssReset */
+body, h1, h2, h3, h4, h5, h6, p, dl, dd, ol, ul {
+  margin: 0;
+}
+ol, ul, th, td {
+  padding: 0;
+}
+ol, ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border: 0;
+  vertical-align: top;
+}
+
+.banner {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+  border: 3px solid #333;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.pics {
+  position: absolute;
+  width: 4200px;
+  height: 400px;
+  z-index: 1;
+}
+.pics > li {
+  float: left;
+}
+.pics > li > img {
+  width: 600px;
+  height: 400px;
+}
+
+.arrow {
+  position: absolute;
+  top: 180px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btns {
+  position: absolute;
+  left: 260px;
+  bottom: 20px;
+  z-index: 2;
+}
+.btns > li {
+  float: left;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
