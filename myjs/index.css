@@ -1,0 +1,23 @@
+/* cssReset */
+body, h1, h2, h3, h4, h5, h6, p, dl, dd, ol, ul {
+    margin: 0;
+}
+ol, ul, th, td {
+    padding: 0;
+}
+ol, ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+img {
+    border: 0;
+    vertical-align: top;
+}
+
+.box {
+    margin: 0 auto;
+    background: #00f;
+    cursor: pointer;
+}

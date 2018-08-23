@@ -1,0 +1,28 @@
+1、this的值取决于执行时的作用域
+
+2、函数声明跟函数表达式是一样的，函数声明对应的变量名跟函数表达式的变量都是对应函数的引用，相当于指针。唯一区别是函数声明在js执行时提升到最前面，而函数表达式只会在执行到当前时赋值给对应变量
+
+3、立即执行函数（IIFE）的作用：创建一个独立的作用域，避免污染变量
+
+4、对象有属性__proto__,指向该对象的构造函数的原型对象；方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象（ps:方法也是对象，__proto__又称[[Prototype]]）
+
+
+
+
+
+
+css:
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+
+
+
+nodejs控制台输入：
+process.stdin.resume();
+process.stdin.setEncoding("utf8");
+
+process.stdin.on("data", function (chunk) {
+    console.log(chunk.slice(0, -2));
+    // process.stdin.pause();
+    process.stdin.end();
+});
