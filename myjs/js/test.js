@@ -1,14 +1,17 @@
 var box = document.getElementById("box");
+var data = document.getElementById("data");
 
 box.addEventListener("click", function() {
+    console.log(data);
     superagent.get('https://u.y.qq.com/cgi-bin/musicu.fcg').set({
         referer: 'https://y.qq.com/portal/player_radio.html'
-    }).query({
+    }).withCredentials().query({
         platform: 'yqq',
         data: '{"songlist":{"module":"pf.radiosvr","method":"GetRadiosonglist","param":{"id":199,"firstplay":1,"num":10}}}'
     }).end(function (error, response) {
         if (error) return;
         console.log(response);
+        data.innerHTML = "sb";
     });
 });
 
