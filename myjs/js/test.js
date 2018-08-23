@@ -1,14 +1,17 @@
 var box = document.getElementById("box");
 
 box.addEventListener("click", function() {
-    superagent.get('http://fm.taihe.com/dev/api/').query({
-        tn: 'playlist',
-        id: 'public_tuijian_ktv'
+    superagent.get('https://u.y.qq.com/cgi-bin/musicu.fcg').set({
+        referer: 'https://y.qq.com/portal/player_radio.html'
+    }).query({
+        platform: 'yqq',
+        data: '{"songlist":{"module":"pf.radiosvr","method":"GetRadiosonglist","param":{"id":199,"firstplay":1,"num":10}}}'
     }).end(function (error, response) {
         if (error) return;
         console.log(response);
     });
 });
+
 
 // http://fm.taihe.com/dev/api/?tn=playlist&id=public_tuijian_ktv&hashcode=3ac0f90fa4cc63b1085d7de7f6f98b32&_=1535037869250
 /*
@@ -25,8 +28,9 @@ box.addEventListener("click", function() {
 
 /*
 box.addEventListener("click", function() {
-    superagent.get('https://jirenguapi.applinzi.com/fm/getSong.php').query({
-        "channel": "public_tuijian_ktv"
+    superagent.get('http://fm.taihe.com/dev/api/').query({
+        tn: 'playlist',
+        id: 'public_tuijian_ktv'
     }).end(function (error, response) {
         if (error) return;
         console.log(response);
