@@ -1,33 +1,81 @@
 var box = document.getElementById("box");
 var data = document.getElementById("data");
+var GetRadiosonglist = function(msg) {
+    console.log(msg);
+};
+var MusicJsonCallback = function(msg) {
+    console.log(msg);
+};
+var MusicJsonCallback_lrc = function(msg) {
+    console.log(msg);
+};
+
+function getRadio(radio_id) {
+    $.ajax({
+        url: 'https://u.y.qq.com/cgi-bin/musicu.fcg',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Referer', 'https://y.qq.com/portal/player_radio.html');
+        },
+        dataType: 'jsonp',
+        jsonp: 'jsonpCallback',
+        type: 'get',
+        data: {
+            platform: 'yqq',
+            format: 'jsonp',
+            callback: 'GetRadiosonglist',
+            data: '{"songlist":{"module":"pf.radiosvr","method":"GetRadiosonglist","param":{"id":' + radio_id + ',"firstplay":1,"num":10}}}'
+        }
+    });
+}
+
+// 获取歌曲vkey，必须设置callback（callback指定的是处理数据的函数）因为jsonp请求返回的状态是失败
+function getSong(mid) {
+    $.ajax({
+        url: 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Referer', 'https://y.qq.com/portal/player_radio.html');
+        },
+        dataType: 'jsonp',
+        jsonp: 'jsonpCallback',
+        type: 'get',
+        data: {
+            platform: 'yqq',
+            format: 'json',
+            callback: 'MusicJsonCallback',
+            cid: 205361747,
+            songmid: mid,
+            filename: 'C100004JaCzc1KhTrU.m4a',
+            guid: 6336189520
+        }
+    });
+}
+
+function getLyric(mid) {
+    $.ajax({
+        url: 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Referer', 'https://y.qq.com/portal/player_radio.html');
+        },
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        type: 'get',
+        data: {
+            platform: 'yqq',
+            format: 'jsonp',
+            jsonpCallback: 'MusicJsonCallback_lrc',
+            songmid: mid,
+            pcachetime: new Date().getTime()
+        }
+    });
+}
 
 box.addEventListener("click", function() {
-    console.log(data);
-    superagent.get('https://u.y.qq.com/cgi-bin/musicu.fcg').set({
-        referer: 'https://y.qq.com/portal/player_radio.html'
-    }).withCredentials().query({
-        platform: 'yqq',
-        data: '{"songlist":{"module":"pf.radiosvr","method":"GetRadiosonglist","param":{"id":199,"firstplay":1,"num":10}}}'
-    }).end(function (error, response) {
-        if (error) return;
-        console.log(response);
-        data.innerHTML = "sb";
-    });
+    getRadio('199');
+    // getSong('002I1e2r3xAxtv');
+    getLyric('002I1e2r3xAxtv');
 });
 
 
-// http://fm.taihe.com/dev/api/?tn=playlist&id=public_tuijian_ktv&hashcode=3ac0f90fa4cc63b1085d7de7f6f98b32&_=1535037869250
-/*
-box.addEventListener("click", function() {
-    superagent.post('http://www.kugou.com/yy/index.php').query({
-        r: 'play/getdata',
-        hash: "AE866A5C526E4183E84C93088F428B3B"
-    }).end(function (error, response) {
-        if (error) return;
-        console.log(response);
-    });
-});
-*/
 
 /*
 box.addEventListener("click", function() {
@@ -41,12 +89,11 @@ box.addEventListener("click", function() {
 });
 */
 
-
 // console.log(new Date().getTime());
 
 /*
 var test = {
-    name: '戴智豪dzh',
+    name: '儒道释dzh',
     info: '20个江南'
 };
 // 中文转unicode
