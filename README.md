@@ -5,6 +5,16 @@
 - 使用：https://www.bootcdn.cn/sweetalert/
 - 描述：JavaScript 原生弹框的完美替代品
 
+### tippyjs
+- 源码：https://github.com/atomiks/tippyjs
+- 使用：https://www.bootcdn.cn/tippy.js/
+- 描述：高度可定制的工具提示框插件
+
+### slick
+- 源码：https://github.com/kenwheeler/slick
+- 使用：https://www.bootcdn.cn/slick-carousel/
+- 描述：很刁的一个轮播图插件
+
 ### electron
 - 源码：https://github.com/electron/electron
 - 使用：https://electronjs.org/
@@ -20,16 +30,6 @@
 - 使用：https://www.bootcdn.cn/ionic/
 - 描述：强大的 HTML5 应用程序开发框架
 
-### quill
-- 源码：https://github.com/quilljs/quill
-- 使用：https://www.bootcdn.cn/quill/
-- 描述：轻量级、可定制和跨浏览器的富文本编辑器
-
-### editor.md
-- 源码：https://github.com/pandao/editor.md
-- 使用：https://pandao.github.io/editor.md/
-- 描述：可嵌入的开源 Markdown 在线编辑器组件
-
 ### Babylon
 - 源码：https://github.com/BabylonJS/Babylon.js
 - 使用：https://www.bootcdn.cn/babylonjs/
@@ -40,7 +40,42 @@
 - 使用：https://hexo.io/zh-cn/
 - 描述：基于 Node.js 的快速、简单的博客框架
 
+### quill
+- 源码：https://github.com/quilljs/quill
+- 使用：https://www.bootcdn.cn/quill/
+- 描述：轻量级、可定制和跨浏览器的富文本编辑器
+
+### editor.md
+- 源码：https://github.com/pandao/editor.md
+- 使用：https://pandao.github.io/editor.md/
+- 描述：可嵌入的开源 Markdown 在线编辑器组件
+
+### Modernizr
+- 源码：https://github.com/Modernizr/Modernizr
+- 使用：https://www.bootcdn.cn/modernizr/
+- 描述：检测浏览器的 HTML5 与 CSS3 特性的 JavaScript 插件
+
+### html5shiv
+- 源码：https://github.com/aFarkas/html5shiv
+- 使用：https://www.bootcdn.cn/html5shiv/
+- 描述：使 IE 识别并支持 HTML5 元素的 JavaScript 插件
+
+### howler
+- 源码：https://github.com/goldfire/howler.js
+- 使用：https://www.bootcdn.cn/howler/
+- 描述：Javascript audio library for the modern web
+
 ### showdown
 - 源码：https://github.com/showdownjs/showdown
 - 使用：https://www.bootcdn.cn/showdown/
 - 描述：A bidirectional MD to HTML to MD converter written in Javascript
+
+### js-cookie
+- 源码：https://github.com/js-cookie/js-cookie
+- 使用：https://www.bootcdn.cn/js-cookie/
+- 描述：A simple, lightweight JavaScript API for handling browser cookies
+
+### jquery.easing
+- 源码：https://github.com/gdsmith/jquery.easing
+- 使用：https://www.bootcdn.cn/jquery-easing/
+- 描述：为jQuery动画扩展了30多种过渡效果
