@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-size: 15px;
+  font-family: Microsoft Yahei;
+  color: #222;
+  background-color: rgb(238, 238, 238);
+}
+
+
+.wrapper {
+  width: 670px;
+  height: 500px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 1px 2px 3px #ddd;
+}
+.apart {
+  width: 100%;
+  height: 20px;
+}
+hr {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+/*浮动和绝对定位的区别*/
+.box {
+  position: relative;
+  width: 100%;
+  letter-spacing: 0.5px;
+}
+.taohua {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-color: #0ff;
+}
+.lihua {
+  position: absolute;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background-color: #0ff;
+}
+
+
+/*js平滑滚动网页*/
+.anchor {
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  margin-top: -50px;
+}
+.paging {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #d0d;
+  cursor: pointer;
+}
+.paging.focus {
+  color: #adff2f;
+}
+.piece {
+  width: 100%;
+  height: 800px;
+  margin-top: 30px;
+  border-top: 1px solid #0d0;
+  border-bottom: 1px dashed #ccc;
+}
+
+
+@media screen and (max-width: 800px) {
+  body {font-size: 14px;}
+  .wrapper {width: 90%; margin-top: 25px;}
+  .paging {font-size: 13px;}
+}
