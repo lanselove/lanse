@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IE7兼容试验</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/ieisbad.css">
+</head>
+<body>
+  <div class="wrap">
+    <ul class="list">
+      <li style="background-color: #d0d;"><span class="item-l">浅紫色文字:</span><span class="item-r">#d0d</span></li>
+      <li style="background-color: #0d0;"><span class="item-l">浅绿色文字:</span><span class="item-r">#0d0</span></li>
+    </ul>
+    <div class="form">
+      <input type="text" name="anniu">
+    </div>
+    <ul class="list-pos">
+      <li style="background-color: #060;"><span class="item-l">深绿色文字:</span><span class="item-r">#060</span></li>
+      <li style="background-color: #660;"><span class="item-l">深黄色文字:</span><span class="item-r">#660</span></li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    console.log("收获点：");
+    console.log("1、高度自动的容器如果子元素是浮动(定位)元素，则容器的高度会塌陷，在文档流不占空间，其中浮动元素正常排列，定位元素叠在一起。而");
+    console.log("  1）IE8容器塌陷后浮动元素会在同一行进行排列。");
+    console.log("  2）IE7下如果容器是li标签，即使不设高度也能被内容撑起来。");
+    console.log("2、输入类表单也会绕开浮动元素");
+    console.log("3、overflow: hidden; 限定宽高的同时使得%c容器能够包裹住定义在容器下的所有子元素，所以浮动元素也能包裹进来", "color:red");
+  </script>
+</body>
+</html>

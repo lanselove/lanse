@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: Microsoft Yahei;
+  background-color: #eee;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wrapper {
+  width: 670px;
+  min-height: 500px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 1px 2px 3px #ddd;
+}
+
+.archive {
+  display: table;
+  margin-bottom: 20px;
+  padding-left: 30px;
+  overflow: hidden;
+}
+.archive > h4 {
+  display: table-cell;
+  width: 100px;
+  margin: 0;
+  color: #2c4258;
+}
+.postlist {
+  display: table-cell;
+}
+.postlist > li {
+  margin-bottom: 5px;
+  /*color: #5d7388;*/
+}
+.postlist > li > span {
+  padding-right: 15px;
+  color: #666;
+}
+.postlist > li > a {
+  color: #008000;
+  text-decoration: none;
+}
+.postlist > li > a:hover {
+  color: #206ee5;
+  border-bottom: 1px solid #206ee5;
+}
+
+
+@media screen and (max-width: 800px) {
+  .wrapper {width: 90%; margin-top: 25px;}
+  .archive {display: block; padding-left: 5px;}
+  .archive > h4 {display: block; margin-bottom: 10px;}
+  .postlist {display: block;}
+}

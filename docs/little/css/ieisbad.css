@@ -1,0 +1,67 @@
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wrap {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #ccc;
+}
+
+
+/*
+* 垂直li下方4px空白
+IE6、7下，li的子元素脱离文档流而且自身触发haslayout时会有 4像素bug
+*/
+ul {
+  background-color: #0f0;
+}
+ul > li {
+  height: 22px;
+  *vertical-align: bottom;
+}
+.list-pos > li {
+  position: relative;
+}
+.list .item-l {
+  float: left;
+}
+.list-pos .item-l {
+  position: absolute;
+  left: 0;
+}
+.list .item-r {
+  float: right;
+}
+.list-pos .item-r {
+  position: absolute;
+  right: 0;
+}
+
+
+/*
+* 输入类表单上下1px空白
+*/
+.form {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border: 2px solid #f00;
+  *overflow: hidden;
+}
+.form > input {
+  *float: left;
+  width: 55px;
+  height: 20px;
+}
+/*
+.input {
+  width: 55px;
+  height: 20px;
+  padding: 2px 1px;
+  border: 1px solid #707070;
+  background-color: #fff;
+}
+*/
