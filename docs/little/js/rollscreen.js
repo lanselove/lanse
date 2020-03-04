@@ -3,7 +3,7 @@ var browser = document.querySelector(".browser");
 function getBroswer(){
     var Sys = {};
     var ua = navigator.userAgent.toLowerCase();
-    browser.innerHTML = ua + "&emsp;|&emsp;渲染模式: " + document.compatMode + '<br>';
+    browser.innerHTML = "浏览器标识: " + ua + ",&emsp;渲染模式: " + document.compatMode + '<br>';
     var s;
     (s = ua.match(/edge\/([\d.]+)/)) ? Sys.edge = s[1] :
     (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
@@ -27,7 +27,7 @@ var abc = getBroswer();
 // alert("broswer: " + abc.broswer + " version: " + abc.version);
 var fragment = document.createDocumentFragment();
 var uEle = document.createElement('span');
-uEle.innerHTML = "broswer: " + abc.broswer + ",&emsp;version: " + abc.version;
+uEle.innerHTML = "browser: " + abc.broswer + ",&emsp;version: " + abc.version;
 uEle.className = "info";
 fragment.appendChild(uEle);
 browser.appendChild(uEle);
@@ -44,7 +44,8 @@ browser.appendChild(uEle);
 // getElementsByClassName IE6、7不支持，IE6须用document.body滚动
 var pieces = document.getElementsByClassName("piece");
 var pagings = document.getElementsByClassName("paging");
-var docu = document.documentElement;
+var html = document.documentElement;
+var body = document.body;
 var pageNum = 0;
 var check = function(num) {
     if (pageNum != num) {
@@ -65,7 +66,8 @@ var anchor = (function() {
         slide: function(target) {
             var count = 0;
             var animate = function() {
-                docu.scrollTop = swing(docu.scrollTop, target - docu.scrollTop, during, count);
+                html.scrollTop = swing(html.scrollTop, target - html.scrollTop, during, count);
+                body.scrollTop = swing(body.scrollTop, target - body.scrollTop, during, count);
                 if (count < during) {
                     count++;
                     timer = setTimeout(animate, interval);
@@ -83,11 +85,12 @@ var anchor = (function() {
 })();
 
 window.onscroll = function() {
-    if (docu.scrollTop < pieces[0].offsetTop) {
+    var _scrollTop = html.scrollTop || body.scrollTop;
+    if (_scrollTop < pieces[0].offsetTop) {
         console.log("你在第0页");
-    } else if ((docu.scrollTop >= pieces[0].offsetTop) && (docu.scrollTop < pieces[1].offsetTop)) {
+    } else if ((_scrollTop >= pieces[0].offsetTop) && (_scrollTop < pieces[1].offsetTop)) {
         check(0);
-    } else if ((docu.scrollTop >= pieces[1].offsetTop) && (docu.scrollTop < pieces[2].offsetTop)) {
+    } else if ((_scrollTop >= pieces[1].offsetTop) && (_scrollTop < pieces[2].offsetTop)) {
         check(1);
     } else {
         check(2);
@@ -100,7 +103,6 @@ for (var i = 0; i < pieces.length; i++) {
             console.log(this.offsetTop, index+1);
         });
         pagings[index].addEventListener("click", function() {
-            // document.documentElement.scrollTop = pieces[index].offsetTop;
             if (anchor.status() && pageNum != index) {
                 anchor.slide(pieces[index].offsetTop);
             }
