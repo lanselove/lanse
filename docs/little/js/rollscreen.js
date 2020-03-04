@@ -1,5 +1,5 @@
 var browser = document.querySelector(".browser");
-
+// 如果 regexp 没有标志 g，那么 match() 方法返回的数组中会加上与正则表达式的子表达式匹配的文本(见: https://www.w3school.com.cn/jsref/jsref_match.asp)
 function getBroswer(){
     var Sys = {};
     var ua = navigator.userAgent.toLowerCase();
@@ -30,7 +30,7 @@ var uEle = document.createElement('span');
 uEle.innerHTML = "browser: " + abc.broswer + ",&emsp;version: " + abc.version;
 uEle.className = "info";
 fragment.appendChild(uEle);
-browser.appendChild(uEle);
+browser.appendChild(fragment);
 
 
 
@@ -66,8 +66,10 @@ var anchor = (function() {
         slide: function(target) {
             var count = 0;
             var animate = function() {
-                html.scrollTop = swing(html.scrollTop, target - html.scrollTop, during, count);
-                body.scrollTop = swing(body.scrollTop, target - body.scrollTop, during, count);
+                var cur_scrollTop = html.scrollTop || body.scrollTop;
+                var new_scrollTop = swing(cur_scrollTop, target - cur_scrollTop, during, count);
+                html.scrollTop = new_scrollTop;
+                body.scrollTop = new_scrollTop;
                 if (count < during) {
                     count++;
                     timer = setTimeout(animate, interval);
@@ -86,9 +88,7 @@ var anchor = (function() {
 
 window.onscroll = function() {
     var _scrollTop = html.scrollTop || body.scrollTop;
-    if (_scrollTop < pieces[0].offsetTop) {
-        console.log("你在第0页");
-    } else if ((_scrollTop >= pieces[0].offsetTop) && (_scrollTop < pieces[1].offsetTop)) {
+    if (_scrollTop < pieces[1].offsetTop) {
         check(0);
     } else if ((_scrollTop >= pieces[1].offsetTop) && (_scrollTop < pieces[2].offsetTop)) {
         check(1);
