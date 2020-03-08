@@ -28,7 +28,6 @@ var abc = getBroswer();
 var fragment = document.createDocumentFragment();
 var uEle = document.createElement('span');
 uEle.innerHTML = "browser: " + abc.broswer + ",&emsp;version: " + abc.version;
-uEle.className = "info";
 fragment.appendChild(uEle);
 browser.appendChild(fragment);
 
@@ -64,12 +63,12 @@ var anchor = (function() {
     };
     return {
         slide: function(target) {
-            var count = 0;
+            var count = 1;
+            var initial = html.scrollTop || body.scrollTop;
             var animate = function() {
-                var cur_scrollTop = html.scrollTop || body.scrollTop;
-                var new_scrollTop = swing(cur_scrollTop, target - cur_scrollTop, during, count);
-                html.scrollTop = new_scrollTop;
-                body.scrollTop = new_scrollTop;
+                var current = swing(initial, target - initial, during, count);
+                html.scrollTop = current;
+                body.scrollTop = current;
                 if (count < during) {
                     count++;
                     timer = setTimeout(animate, interval);
@@ -99,11 +98,9 @@ window.onscroll = function() {
 
 for (var i = 0; i < pieces.length; i++) {
     (function(index) {
-        pieces[index].addEventListener("click", function() {
-            console.log(this.offsetTop, index+1);
-        });
+        pieces[index].querySelector(".info").innerHTML = "距离页面顶部: " + pieces[index].offsetTop + "px";
         pagings[index].addEventListener("click", function() {
-            if (anchor.status() && pageNum != index) {
+            if (anchor.status() && index != pageNum) {
                 anchor.slide(pieces[index].offsetTop);
             }
         });

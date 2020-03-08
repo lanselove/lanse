@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: Microsoft Yahei;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -5,8 +11,8 @@ ul {
 }
 
 .wrap {
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 300px;
   margin: 0 auto;
   background-color: #ccc;
 }
@@ -16,29 +22,56 @@ ul {
 * 垂直li下方4px空白
 IE6、7下，li的子元素脱离文档流而且自身触发haslayout时会有 4像素bug
 */
-ul {
+.list {
   background-color: #0f0;
 }
-ul > li {
-  height: 22px;
-  *vertical-align: bottom;
+.list > li {
+  height: 25px;
+  line-height: 25px;
+}
+.list-flo .item-l {
+  float: left;
+}
+.list-flo .item-r {
+  float: right;
 }
 .list-pos > li {
   position: relative;
-}
-.list .item-l {
-  float: left;
 }
 .list-pos .item-l {
   position: absolute;
   left: 0;
 }
-.list .item-r {
-  float: right;
-}
 .list-pos .item-r {
   position: absolute;
   right: 0;
+}
+
+
+/*li可以居然可以包住浮动，以及vertical-align为什么会对li生效*/
+.baishe {
+  height: 53px;
+  line-height: 53px;
+  font-size: 0;
+  background-color: #656;
+}
+.baishe>img {
+  display: inline-block;
+  width: 41px;
+  height: 41px;
+  vertical-align: middle;
+}
+.qinshe {
+  height: 50px;
+  background-color: #808;
+}
+.inlay {
+  /*height: 41px;*/
+  /*vertical-align: top;*/
+  background-color: #505;
+}
+.inlay>img {
+  float: right;
 }
 
 
@@ -49,12 +82,12 @@ ul > li {
   margin-top: 12px;
   margin-bottom: 12px;
   border: 2px solid #f00;
-  *overflow: hidden;
 }
 .form > input {
-  *float: left;
   width: 55px;
   height: 20px;
+  line-height: 20px;
+  font-size: 14px;
 }
 /*
 .input {
