@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #adu {
+            position: fixed;
+            z-index: 999;
+            width: 200px;
+            height: 150px;
+            background: #f90;
+        }
+        .adu-close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 2px;
+            font-size: 12px;
+            font-family: SimSun;
+            color: #fff;
+            background-color: #963;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="adu" style="left: 0px; top: 0px;">
+        <span class="adu-close">关闭</span>
+    </div>
+    <script src="js/piaoc_easy.js"></script>
+    <script type="text/javascript">
+        console.log("收获点：");
+        console.log("1、DOM元素的children属性所有浏览器都支持，有时可以用它代替兼容性差的getElementsByClassName获取子元素");
+        console.log("2、面向对象编程中的this有时会带来很多不必要的麻烦，而且IE10以下不支持Function的bind方法，所以对一些结构简单的可重用组件，我比较喜欢借助闭包来定义，将它们函数化或者单例化")
+    </script>
+</body>
+</html>
