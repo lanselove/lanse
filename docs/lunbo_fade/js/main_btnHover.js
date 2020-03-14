@@ -1,148 +1,156 @@
-// 淡入淡出轮播
-(function() {
-    var banner = document.getElementById("banner");
-    var pics = document.getElementById("pics").getElementsByTagName("li");
-    var btns = document.getElementById("btns").getElementsByTagName("li");
-    var prev = document.getElementById("prev");
-    var next = document.getElementById("next");
-    var lastIndex = 0;
-    var curIndex = 0;
-    var interval = 1000/60;
-    var duration = 400/interval;
-    var playTimer = null;
-    var isAutoPlay = true;
-
-    function fadeOut(index) {
-        pics[index].isNeedOut = true;
-        // 只有淡入完成时才可以淡出
-        if (!pics[index].isNeedIn) {
-            var count = 1;
-            var draw = function() {
-                // 这里的1是淡入的目标透明度，（-1）是淡出的目标透明度减去淡入的目标透明度
-                var curFace = 1 + (-1) * (0.5 - Math.cos(Math.PI * count/duration) / 2);
-                pics[index].style.opacity = curFace.toString();
-                if (count < duration) {
-                    count++;
-                    pics[index].timer = setTimeout(draw, interval);
-                } else {
-                    pics[index].isNeedOut = false;
-                    // 如果需要自动播放，在这里去调用自动播放函数
-                    if (isAutoPlay && (index == lastIndex)) {
-                        autoPlay();
-                    }
-                }
-            };
-
-            pics[index].timer = setTimeout(draw, interval);
-        }
-    }
-
-    function fadeIn(index) {
+function BeeFade(opt) {
+    this.element = opt.element;
+    this.index = opt.index;
+    this.DELAY = 1000/60;
+    this.DURING = this.setting[(opt.speed)?opt.speed:"normal"] * 60/1000;
+    this.BREAK = Math.round(this.DURING * 30/100);
+    this.duration = this.DURING;
+    this.timer = null;
+    this.waitOut = false;
+    this.pending = false;
+    this.final = opt.final;
+}
+BeeFade.prototype = {
+    setting: { "slow": 1000, "normal": 800, "fast": 600 },
+    swing: function(b, c, d, t) {
+        return b + c * Math.sin((Math.PI/2) * t/d);  // Sine.easeOut
+    },
+    fadeTo: function(target) {
+        var that = this;
+        var initial = (window.mise) ? parseFloat(this.element.style.filter.match(/opacity=([\d.]+)/)[1])/100 : parseFloat(this.element.style.opacity);
+        var changed = target-initial;
         var count = 1;
-        var beginFace = parseFloat(pics[index].style.opacity);
-        // 这里的1是淡入的目标透明度
-        var changeFace = 1 - beginFace;
-        var draw = function() {
-            var curFace = beginFace + changeFace * (0.5 - Math.cos(Math.PI * count/duration) / 2);
-            pics[index].style.opacity = curFace.toString();
-            if (count < duration) {
-                count++;
-                pics[index].timer = setTimeout(draw, interval);
+        var animate = function() {
+            var current = that.swing(initial, changed, that.DURING, count);
+            // console.log("第"+that.index+"张", current, count);
+            if (window.mise) {
+                that.element.style.filter = "progid:DXImageTransform.Microsoft.Alpha(opacity=" + current*100 + ")";
             } else {
-                pics[index].isNeedIn = false;
-                //如果需要淡出，在这里去调用淡出函数
-                if (pics[index].isNeedOut) {
-                    fadeOut(index);
-                }
+                that.element.style.opacity = current.toString();
+            }
+            if (count < that.duration) {
+                count++;
+                that.timer = setTimeout(animate, that.DELAY);
+            } else {
+                that.next();
             }
         };
-
-        // 无论之前是淡入还是淡出，都直接推掉，开始淡入
-        clearTimeout(pics[index].timer);
-        // 如果之前在淡出，强行设置淡出为完成状态
-        pics[index].isNeedOut = false;
-        pics[index].isNeedIn = true;
-        pics[index].timer = setTimeout(draw, interval);
-    }
-
-    function picFade() {
-        btns[lastIndex].style.backgroundImage = "url(images/yuan.png)";
-        btns[curIndex].style.backgroundImage = "url(images/yuan_hover.png)";
-        pics[lastIndex].style.zIndex = "0";
-        pics[curIndex].style.zIndex = "1";
-        fadeIn(curIndex);
-        fadeOut(lastIndex);
-    }
-
-    function autoPlay() {
-        // 只有先前索引位置淡出完成才可以自动播放
-        if (!pics[lastIndex].isNeedOut) {
-            playTimer = setTimeout(function() {
-                lastIndex = curIndex;
-                if(lastIndex == btns.length-1) {
-                    curIndex = 0;
-                }
-                else {
-                    curIndex++;
-                }
-                picFade();
-            }, 3000);
+        this.timer = setTimeout(animate, this.DELAY);
+    },
+    fadeIn: function() {
+        clearTimeout(this.timer);
+        this.waitOut = false;
+        this.pending = true;
+        this.duration = this.DURING;
+        this.fadeTo(1);
+    },
+    fadeOut: function() {
+        if (this.pending) {
+            this.waitOut = true;
+            this.duration = this.BREAK;
+        } else {
+            this.pending = true;
+            this.fadeTo(0);
         }
+    },
+    next: function() {
+        if (this.waitOut) {
+            this.waitOut = false;
+            this.duration = this.DURING;
+            this.fadeTo(0);
+        } else {
+            this.pending = false;
+            if (this.final) {
+                this.final(this);
+            }
+        }
+    },
+    done: function() {
+        return !this.pending;
     }
+};
 
-    prev.onmouseenter = function() {
-        prev.style.backgroundImage = "url(images/prev_hover.png)";
-    };
-    prev.onmouseleave = function() {
-        prev.style.backgroundImage = "url(images/prev.png)";
-    };
-    next.onmouseenter = function() {
-        next.style.backgroundImage = "url(images/next_hover.png)";
-    };
-    next.onmouseleave = function() {
-        next.style.backgroundImage = "url(images/next.png)";
-    };
 
-    prev.onclick = function() {
-        lastIndex = curIndex;
-        if(lastIndex == 0) {
-            curIndex = btns.length-1;
-        }
-        else {
-            curIndex--;
-        }
-        picFade();
-    };
-
-    next.onclick = function() {
-        lastIndex = curIndex;
+var banner = document.getElementById("banner");
+var pics = document.getElementById("pics").getElementsByTagName("li");
+var btns = document.getElementById("btns").getElementsByTagName("i");
+var lastIndex = 0;
+var curIndex = 0;
+var playTimer = null;
+var isAutoPlay = true;
+var beeSet = [];
+var picFade = function() {
+    btns[lastIndex].className = "";
+    btns[curIndex].className = "active";
+    beeSet[lastIndex].fadeOut();
+    beeSet[curIndex].fadeIn();
+};
+var autoPlay = function() {
+    playTimer = setTimeout(function() {
+        lastIndex = curIndex++;
         if(lastIndex == btns.length-1) {
             curIndex = 0;
         }
-        else {
-            curIndex++;
-        }
         picFade();
-    };
+    }, 3000);
+};
 
-    for (var i = 0; i < btns.length; i++) {
-        btns[i].index = i;
-        btns[i].onmouseenter = function() {
-            if (this.index != curIndex) {
+for (var i = 0; i < pics.length; i++) {
+    beeSet[i] = new BeeFade({
+        element: pics[i],
+        index: i,
+        speed: "slow",
+        final: function(bee) {
+            if (isAutoPlay && bee.index == lastIndex) autoPlay();
+        }
+    });
+    (function(index) {
+        btns[index].onclick = function() {
+            if (index != curIndex) {
                 lastIndex = curIndex;
-                curIndex = this.index;
+                curIndex = index;
                 picFade();
             }
         };
-    }
+    })(i);
+}
 
-    autoPlay();
-    banner.onmouseenter = function() {
-        isAutoPlay = false;
-        clearTimeout(playTimer);
-    };
-    banner.onmouseleave = function() {
-        isAutoPlay = true;
-        autoPlay();
-    };
-})();
+banner.onmouseenter = function() {
+    isAutoPlay = false;
+    clearTimeout(playTimer);
+};
+banner.onmouseleave = function() {
+    isAutoPlay = true;
+    if (beeSet[lastIndex].done()) autoPlay();
+};
+autoPlay();
+
+var prev = document.getElementById("prev");
+var next = document.getElementById("next");
+prev.onmouseenter = function() {
+    prev.style.backgroundPosition = "-55px -5px";
+};
+prev.onmouseleave = function() {
+    prev.style.backgroundPosition = "-5px -5px";
+};
+next.onmouseenter = function() {
+    next.style.backgroundPosition = "-55px -105px";
+};
+next.onmouseleave = function() {
+    next.style.backgroundPosition = "-5px -105px";
+};
+prev.onclick = function() {
+    lastIndex = curIndex--;
+    if(lastIndex == 0) {
+        curIndex = btns.length-1;
+    }
+    picFade();
+};
+next.onclick = function() {
+    lastIndex = curIndex++;
+    if(lastIndex == btns.length-1) {
+        curIndex = 0;
+    }
+    picFade();
+};
+

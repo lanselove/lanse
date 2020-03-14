@@ -47,17 +47,25 @@ img {
   cursor: pointer;
   z-index: 2;
 }
-
+.arrow, .btns > i {
+  background-image: url(../images/sprites.png);
+}
+/*left: 260px;*/
 .btns {
   position: absolute;
-  left: 260px;
+  left: 50%;
   bottom: 20px;
   z-index: 2;
+  margin-left: -35px;
 }
-.btns > li {
+.btns > i {
   float: left;
   width: 10px;
   height: 10px;
   margin-right: 5px;
+  background-position: -20px -70px;
   cursor: pointer;
+}
+.btns > i.active {
+  background-position: -70px -70px;
 }

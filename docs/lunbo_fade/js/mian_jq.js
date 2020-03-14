@@ -2,7 +2,7 @@
 (function() {
     var $banner = $("#banner");
     var $pics = $("#pics > li");
-    var $btns = $("#btns > li");
+    var $btns = $("#btns > i");
     var $prev = $("#prev");
     var $next = $("#next");
     var lastIndex = $btns.length-1;
@@ -11,45 +11,41 @@
     var isAutoPlay = true;
 
     function picFade() {
-        $btns.eq(curIndex).css("backgroundImage", "url(images/yuan_hover.png)");
-        $btns.eq(lastIndex).css("backgroundImage", "url(images/yuan.png)");
+        $btns.eq(curIndex).addClass("active");
+        $btns.eq(lastIndex).removeClass("active");
         $pics.eq(curIndex).fadeIn();
         $pics.eq(lastIndex).fadeOut(function() {
             if (isAutoPlay && ($(this).index() == lastIndex)) {
                 autoPlay();
             }
         });
+        // console.log($pics.get(lastIndex));
+        // setTimeout(function() {
+        //     console.log($pics.eq(lastIndex).attr("style"));
+        // }, 30);
     }
 
     function autoPlay() {
-        if ($pics.eq(lastIndex).css("display") == "none") {
-            playTimer = setTimeout(function() {
-                lastIndex = curIndex;
-                if(lastIndex == $btns.length-1) {
-                    curIndex = 0;
-                }
-                else {
-                    curIndex++;
-                }
-                picFade();
-            }, 3000);
-        }
+        playTimer = setTimeout(function() {
+            lastIndex = curIndex++;
+            if(lastIndex == $btns.length-1) {
+                curIndex = 0;
+            }
+            picFade();
+        }, 3000);
     }
 
     $prev.on({
         "mouseenter": function() {
-            $prev.css("backgroundImage", "url(images/prev_hover.png)");
+            $prev.css("backgroundPosition", "-55px -5px");
         },
         "mouseleave": function() {
-            $prev.css("backgroundImage", "url(images/prev.png)");
+            $prev.css("backgroundPosition", "-5px -5px");
         },
         "click": function() {
-            lastIndex = curIndex;
+            lastIndex = curIndex--;
             if(lastIndex == 0) {
                 curIndex = $btns.length-1;
-            }
-            else {
-                curIndex--;
             }
             picFade();
         }
@@ -57,18 +53,15 @@
 
     $next.on({
         "mouseenter": function() {
-            $next.css("backgroundImage", "url(images/next_hover.png)");
+            $next.css("backgroundPosition", "-55px -105px");
         },
         "mouseleave": function() {
-            $next.css("backgroundImage", "url(images/next.png)");
+            $next.css("backgroundPosition", "-5px -105px");
         },
         "click": function() {
-            lastIndex = curIndex;
+            lastIndex = curIndex++;
             if(lastIndex == $btns.length-1) {
                 curIndex = 0;
-            }
-            else {
-                curIndex++;
             }
             picFade();
         }
@@ -90,7 +83,7 @@
         },
         "mouseleave": function() {
             isAutoPlay = true;
-            autoPlay();
+            if ($pics.eq(lastIndex).css("display") == "none") autoPlay();
         }
     });
 

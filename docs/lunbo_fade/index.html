@@ -4,37 +4,41 @@
   <meta charset="UTF-8">
   <title>test</title>
   <link rel="stylesheet" href="css/index.css">
+  <!--[if lt IE 9]>
+  <script>window.mise = true;</script>
+  <![endif]-->
 </head>
 <body>
   <div class="banner" id="banner">
     <ul class="pics" id="pics">
-      <li style="z-index: 1;opacity: 1;">
+      <li style="opacity: 1;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);">
         <img src="images/1.jpg">
       </li>
-      <li style="z-index: 0;opacity: 0;">
+      <li style="opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);">
         <img src="images/2.jpg">
       </li>
-      <li style="z-index: 0;opacity: 0;">
+      <li style="opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);">
         <img src="images/3.jpg">
       </li>
-      <li style="z-index: 0;opacity: 0;">
+      <li style="opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);">
         <img src="images/4.jpg">
       </li>
-      <li style="z-index: 0;opacity: 0;">
+      <li style="opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);">
         <img src="images/5.jpg">
       </li>
     </ul>
-    <span class="arrow" id="prev" style="left: 15px;background-image: url(images/prev.png);"></span>
-    <span class="arrow" id="next" style="right: 15px;background-image: url(images/next.png);"></span>
-    <ul class="btns" id="btns">
-      <li style="background-image: url(images/yuan_hover.png);"></li>
-      <li style="background-image: url(images/yuan.png);"></li>
-      <li style="background-image: url(images/yuan.png);"></li>
-      <li style="background-image: url(images/yuan.png);"></li>
-      <li style="background-image: url(images/yuan.png);"></li>
-    </ul>
+    <span class="arrow" id="prev" style="left: 15px;background-position: -5px -5px;"></span>
+    <span class="arrow" id="next" style="right: 15px;background-position: -5px -105px;"></span>
+    <span class="btns" id="btns">
+      <i class="active"></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </span>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/main_btnHover.js"></script>
+  <!-- <script src="js/test.js"></script> -->
 </body>
 </html>
