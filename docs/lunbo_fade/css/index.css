@@ -18,38 +18,55 @@ img {
 
 .banner {
   position: relative;
+  z-index: 0;
   width: 600px;
   height: 400px;
   margin: 0 auto;
   border: 3px solid #333;
-  z-index: 0;
 }
 
 .pics {
-  position: absolute;
-  width: 600px;
-  height: 400px;
-  z-index: 1;
+  /*width: 600px;*/
+  /*height: 400px;*/
 }
 .pics > li {
   position: absolute;
+  z-index: 1;
+  width: 100%;
 }
 .pics > li > img {
   width: 600px;
-  height: 400px;
+  /*height: 400px;*/
 }
 
+/*top: 180px;*/
 .arrow {
   position: absolute;
-  top: 180px;
+  top: 50%;
+  z-index: 2;
   width: 40px;
   height: 40px;
+  margin-top: -20px;
   cursor: pointer;
-  z-index: 2;
 }
 .arrow, .btns > i {
   background-image: url(../images/sprites.png);
 }
+#prev {
+  left: 15px;
+  background-position: -5px -5px;
+}
+#prev.active {
+  background-position: -55px -5px;
+}
+#next {
+  right: 15px;
+  background-position: -5px -105px;
+}
+#next.active {
+  background-position: -55px -105px;
+}
+
 /*left: 260px;*/
 .btns {
   position: absolute;
@@ -68,4 +85,17 @@ img {
 }
 .btns > i.active {
   background-position: -70px -70px;
+}
+
+@media screen and (max-width: 767px) {
+  .banner {width:100%;/*318pxheight:212px;*/border: none;}
+  .pics > li > img {width: 100%;}
+  .arrow {width: 20px;height: 20px;margin-top: -10px;background-size: 50px;/*250%*/}
+  #prev {background-position: -2.5px -2.5px;}
+  #prev.active {background-position: -27.5px -2.5px;}
+  #next {background-position: -2.5px -52.5px;}
+  #next.active {background-position: -27.5px -52.5px;}
+  .btns {bottom: 8px;margin-left: -30px;}
+  .btns > i {width: 8px;height: 8px;background-size: 80px;/*1000%*/background-position: -16px -56px;}
+  .btns > i.active {background-position: -56px -56px;}
 }
