@@ -37,10 +37,10 @@
 
     $prev.on({
         "mouseenter": function() {
-            $prev.css("backgroundPosition", "-55px -5px");
+            $(this).addClass("active");
         },
         "mouseleave": function() {
-            $prev.css("backgroundPosition", "-5px -5px");
+            $(this).removeClass("active");
         },
         "click": function() {
             lastIndex = curIndex--;
@@ -53,10 +53,10 @@
 
     $next.on({
         "mouseenter": function() {
-            $next.css("backgroundPosition", "-55px -105px");
+            $(this).addClass("active");
         },
         "mouseleave": function() {
-            $next.css("backgroundPosition", "-5px -105px");
+            $(this).removeClass("active");
         },
         "click": function() {
             lastIndex = curIndex++;

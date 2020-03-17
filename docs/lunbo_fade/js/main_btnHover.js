@@ -1,3 +1,4 @@
+// 渐隐渐显轮播
 function BeeFade(opt) {
     this.element = opt.element;
     this.index = opt.index;
@@ -95,26 +96,6 @@ var autoPlay = function() {
     }, 3000);
 };
 
-// 文档加载前动态添加style的好处是可以在layout前定义好样式，但要多费功夫处理js。
-/*
-<script type="text/javascript">
-  var device = window.screen.width;
-  if (device < 768) {
-      var style = document.createElement("style");
-      var bies = device*2/3;
-      style.type = "text/css";
-      style.innerHTML = ".banner{height:" + bies + "px;}";
-      document.head.append(style);
-  }
-</script>
-*/
-// console.log(document.head);
-// console.log(document.body);
-// 文档加载后更改内联样式速度慢可能影响到布局
-// banner.style.height = pics[0].offsetHeight + "px";
-var aiex = window.screen.width;
-if (aiex<600) banner.style.height = aiex*2/3 + "px";
-
 for (var i = 0; i < pics.length; i++) {
     beeSet[i] = new BeeFade({
         element: pics[i],
@@ -148,19 +129,15 @@ autoPlay();
 var prev = document.getElementById("prev");
 var next = document.getElementById("next");
 prev.onmouseenter = function() {
-    // prev.style.backgroundPosition = "-55px -5px";
     this.className = "arrow active";
 };
 prev.onmouseleave = function() {
-    // prev.style.backgroundPosition = "-5px -5px";
     this.className = "arrow";
 };
 next.onmouseenter = function() {
-    // next.style.backgroundPosition = "-55px -105px";
     this.className = "arrow active";
 };
 next.onmouseleave = function() {
-    // next.style.backgroundPosition = "-5px -105px";
     this.className = "arrow";
 };
 prev.onclick = function() {
@@ -182,27 +159,46 @@ next.onclick = function() {
 /*
 JS实现自动轮播图效果(自适应屏幕宽度+手机触屏滑动)
 https://www.jb51.net/article/116527.htm
+文档加载前动态添加style的好处是可以在layout前定义好样式，但要多费功夫处理js。
+<script type="text/javascript">
+  var device = window.screen.width;
+  if (device < 768) {
+      var style = document.createElement("style");
+      var bies = device*2/3;
+      style.type = "text/css";
+      style.innerHTML = ".banner{height:" + bies + "px;}";
+      document.head.append(style);
+  }
+</script>
 */
-var startX,endX,moveX;
-var invalid = false;
-banner.addEventListener("touchstart", function() {
-    var touch = event.touches[0];
-    startX = touch.pageX;
-    invalid = true;
-    isAutoPlay = false;
-    clearTimeout(playTimer);
-}, false);
-banner.addEventListener("touchmove", function() {
-    var touch = event.touches[0];
-    endX = touch.pageX;
-    invalid = false;
-}, false);
-banner.addEventListener("touchend", function() {
-    if (invalid) return;
-    moveX = startX - endX;
-    if(moveX>50){
-        prev.onclick();
-    } else if(moveX<-50){
-        next.onclick();
-    }
-}, false);
+// console.log(document.head);
+// console.log(document.body);
+// 文档加载后更改内联样式速度慢可能影响到布局
+// banner.style.height = pics[0].offsetHeight + "px";
+var aiex = window.screen.width;
+if (aiex<600) {
+    banner.style.height = aiex*2/3 + "px";
+    var startX,endX,moveX;
+    var invalid = false;
+    banner.addEventListener("touchstart", function() {
+        var touch = event.touches[0];
+        startX = touch.pageX;
+        invalid = true;
+        isAutoPlay = false;
+        clearTimeout(playTimer);
+    });
+    banner.addEventListener("touchmove", function() {
+        var touch = event.touches[0];
+        endX = touch.pageX;
+        invalid = false;
+    });
+    banner.addEventListener("touchend", function() {
+        if (invalid) return;
+        moveX = endX-startX;
+        if(moveX>50){
+            prev.onclick();
+        } else if(moveX<-50){
+            next.onclick();
+        }
+    });
+}
