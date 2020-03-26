@@ -44,10 +44,10 @@
 
     $prev.on({
         "mouseenter": function() {
-            $prev.addClass("active");
+            $prev.addClass("hover");
         },
         "mouseleave": function() {
-            $prev.removeClass("active");
+            $prev.removeClass("hover");
         },
         "click": function() {
             if (isSlided) {
@@ -62,10 +62,10 @@
 
     $next.on({
         "mouseenter": function() {
-            $next.addClass("active");
+            $next.addClass("hover");
         },
         "mouseleave": function() {
-            $next.removeClass("active");
+            $next.removeClass("hover");
         },
         "click": function() {
             if (isSlided) {

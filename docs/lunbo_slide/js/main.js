@@ -1,4 +1,39 @@
-//无限滚动轮播
+var banner = document.getElementById("banner");
+var pics = document.getElementById("pics");
+var btns = document.getElementById("btns").getElementsByTagName("i");
+var prev = document.getElementById("prev");
+var next = document.getElementById("next");
+
+var beeParty = swiper({
+    type: "moveX",
+    speed: "slow",
+    wrapLayer: banner,
+    picsLayer: pics,
+    ctrlBtns: btns,
+    ctrlPrev: prev,
+    ctrlNext: next,
+    isAutoPlay: false,
+    // infinite: false,
+    touchON: true,
+    pixRatio: 2/3
+});
+
+prev.onmouseenter = function() {
+    this.className = "arrow hover";
+};
+prev.onmouseleave = function() {
+    this.className = "arrow";
+};
+next.onmouseenter = function() {
+    this.className = "arrow hover";
+};
+next.onmouseleave = function() {
+    this.className = "arrow";
+};
+
+
+
+/*//无限滚动轮播
 function BeeSlide(opt) {
     this.element = opt.element;
     this.length = opt.length;
@@ -186,4 +221,4 @@ if (aiex < 600) {
             picSlide(unitOffset - moveX);
         }
     });
-}
+}*/

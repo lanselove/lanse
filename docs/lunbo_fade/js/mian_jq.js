@@ -37,10 +37,10 @@
 
     $prev.on({
         "mouseenter": function() {
-            $(this).addClass("active");
+            $(this).addClass("hover");
         },
         "mouseleave": function() {
-            $(this).removeClass("active");
+            $(this).removeClass("hover");
         },
         "click": function() {
             lastIndex = curIndex--;
@@ -53,10 +53,10 @@
 
     $next.on({
         "mouseenter": function() {
-            $(this).addClass("active");
+            $(this).addClass("hover");
         },
         "mouseleave": function() {
-            $(this).removeClass("active");
+            $(this).removeClass("hover");
         },
         "click": function() {
             lastIndex = curIndex++;

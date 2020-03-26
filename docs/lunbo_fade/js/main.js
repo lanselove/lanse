@@ -1,4 +1,38 @@
-// 淡入淡出轮播
+var banner = document.getElementById("banner");
+var pics = document.getElementById("pics");
+var btns = document.getElementById("btns").getElementsByTagName("i");
+var prev = document.getElementById("prev");
+var next = document.getElementById("next");
+
+var beeParty = swiper({
+    type: "fade",
+    speed: "slow",
+    wrapLayer: banner,
+    picsLayer: pics,
+    ctrlBtns: btns,
+    ctrlWay: "mouseenter",
+    ctrlPrev: prev,
+    ctrlNext: next,
+    touchON: false,
+    pixRatio: 2/3
+});
+
+prev.onmouseenter = function() {
+    this.className = "arrow hover";
+};
+prev.onmouseleave = function() {
+    this.className = "arrow";
+};
+next.onmouseenter = function() {
+    this.className = "arrow hover";
+};
+next.onmouseleave = function() {
+    this.className = "arrow";
+};
+
+
+
+/*// 淡入淡出轮播
 (function() {
     var banner = document.getElementById("banner");
     var pics = document.getElementById("pics").getElementsByTagName("li");
@@ -114,4 +148,4 @@
         isAutoPlay = true;
         autoPlay();
     };
-})();
+})();*/
