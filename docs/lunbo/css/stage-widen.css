@@ -1,0 +1,127 @@
+body, h1, h2, h3, h4, h5, h6, p, dl, dd, ol, ul {
+  margin: 0;
+}
+ol, ul, th, td {
+  padding: 0;
+}
+ol, ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border: 0;
+  vertical-align: top;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 15px;
+  font-family: Microsoft Yahei;
+  color: #222;
+}
+
+
+.container {
+  width: 680px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.banner {
+  position: relative;
+  width: 680px;
+  height: 180px;
+  overflow: hidden;
+}
+.pics {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+.pics > li {
+  display: none;
+  position: absolute;
+  left: 140px;
+  top: 18px;
+  z-index: 1;
+  width: 400px;
+  height: 144px;
+  transition-property: left,top,width,height;
+  transition-duration: .4s;
+}
+.pics > li.active {
+  display: block;
+}
+.pics > li.before {
+  left: 0;
+}
+.pics > li.behind {
+  left: 280px;
+}
+.pics > li.toward {
+  left: 90px;
+  top: 0;
+}
+.pics > li.closer {
+  transform: translateZ(1px);
+}
+.pics > li.closest {
+  transform: translateZ(2px);
+}
+/*oriented */
+.pics > li.bigger {
+  width: 500px;
+  height: 180px;
+}
+.pics > li > img {
+  width: 100%;
+  height: 100%;
+}
+
+.arrow {
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 32px;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+.banner.hover .arrow {
+  display: block;
+}
+.arrow:hover {
+  opacity: 1;
+}
+#prev {
+  left: 0;
+  background-image: url(../img/arrow_back.png);
+}
+#next {
+  right: 0;
+  background-image: url(../img/arrow_forward.png);
+}
+
+.btns {
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  z-index: 2;
+  margin-left: -54px;
+  cursor: pointer;
+}
+.btns > i {
+  float: left;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  background-image: url(../img/yuan.png);
+}
+.btns > i.active {
+  background-image: url(../img/yuan_hover.png);
+}

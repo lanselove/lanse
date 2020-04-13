@@ -1,0 +1,95 @@
+body, h1, h2, h3, h4, h5, h6, p, dl, dd, ol, ul {
+  margin: 0;
+}
+ol, ul, th, td {
+  padding: 0;
+}
+ol, ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border: 0;
+  vertical-align: top;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 15px;
+  font-family: Microsoft Yahei;
+  color: #222;
+}
+
+
+.container {
+  width: 660px;
+  margin: 60px auto;
+}
+
+
+.content {
+  width: 100%;
+  height: 400px;
+}
+.content h3 {
+  margin-bottom: 5px;
+  font-weight: 400;
+  font-size: 1.3em;
+  font-family: SimSun;
+}
+.content hr {
+  height: 1px;
+  border: none;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  background-color: #cdcdcd;
+}
+
+.notice-hor {
+  width: 658px;
+  height: 28px;
+  border: 1px solid #7c7c7c;
+}
+.banner1 {
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: default;
+}
+.banner1 > span {
+  padding-right: 200px;
+  line-height: 28px;
+}
+
+
+.somenews {
+  float: left;
+  width: 330px;
+  height: 200px;
+  background-color: rgb(238, 238, 238);
+}
+
+.notice-ver {
+  float: right;
+  width: 280px;
+  height: 200px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.banner2 {
+  width: 100%;
+}
+.banner2 > li {
+  height: 25px;
+  padding-left: 10px;
+  line-height: 25px;
+}
+.banner2 > li > a {
+  color: #5f5256;
+  transition: color .1s;
+}
+.banner2 > li > a:hover {
+  color: #5e9eff;
+}

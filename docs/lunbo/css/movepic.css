@@ -1,0 +1,173 @@
+body, h1, h2, h3, h4, h5, h6, p, dl, dd, ol, ul {
+  margin: 0;
+}
+ol, ul, th, td {
+  padding: 0;
+}
+ol, ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border: 0;
+  vertical-align: top;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 15px;
+  font-family: Microsoft Yahei;
+  color: #222;
+}
+
+
+.container {
+  width: 700px;
+  margin: 60px auto;
+}
+.container h3 {
+  margin-bottom: 5px;
+  font-weight: 400;
+  font-size: 1.3em;
+  font-family: SimSun;
+}
+.container hr {
+  height: 1px;
+  border: none;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  background-color: #cdcdcd;
+}
+
+.banner1 {
+  position: relative;
+  width: 660px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(238, 238, 238);
+  overflow: hidden;
+}
+.pics1 {
+  position: absolute;
+  top: 25px;
+  z-index: 1;
+  width: 1100px;
+}
+.pics1 > li {
+  float: left;
+  width: 200px;
+  height: 150px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.pics1 > li > img {
+  width: 100%;
+  height: 100%;
+}
+
+.arrow1 {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 20%;
+  height: 100%;
+}
+#prev1 {
+  left: 0;
+}
+#prev1:hover {
+  cursor: url(../img/arrow_back.cur),auto;
+  /*IE不支持，chrome新版本已废弃*/
+}
+#next1 {
+  right: 0;
+}
+#next1:hover {
+  cursor: url(../img/arrow_forward.cur),auto;
+}
+
+
+
+.banner2 {
+  position: relative;
+  width: 692px;
+  height: 204px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(238, 238, 238);
+  overflow: hidden;
+}
+.pics2 {
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 692px;
+  transform-style: preserve-3d;
+}
+.pics2 > li {
+  float: left;
+  width: 200px;
+  height: 150px;
+  margin-top: 27px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: all 0.2s linear;
+}
+/*.pics > li:hover {
+  transform: translateZ(42px);
+  5: 0.36496  300/822
+}*/
+.pics2 > li.active {
+  width: 232px;
+  height: 174px;
+  margin-top: 15px;
+}
+.pics2 > li > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.arrow2 {
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 32px;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+.banner2.hover .arrow2 {
+  display: block;
+}
+.arrow2:hover {
+  opacity: 1;
+}
+#prev2 {
+  left: 0;
+  background-image: url(../img/arrow_back.png);
+}
+#next2 {
+  right: 0;
+  background-image: url(../img/arrow_forward.png);
+}
+
+
+
+@media screen and (max-width: 767px) {
+  body {font-size: 14px;}
+  .container {width: 100%; margin-top: 20px;}
+  .container h3 {padding-left: 5px;}
+  .banner1 {width: 348px; height: 150px;}
+  .pics1 {width: 870px; top: 15px;}
+  .pics1 > li {width: 160px; height: 120px; padding-left: 7px; padding-right: 7px;}
+  .banner2 {width: 100%; height: 168px;}
+  .pics2 > li { width: 160px; height: 120px; margin-top: 25px;}
+  .pics2 > li.active { width: 200px; height: 150px; margin-top: 10px;}
+}

@@ -1,47 +1,81 @@
-function flutter(element, speed) {
+/*
+参数：
+area: 活动区域对应的元素
+element: 活动元素
+speed: 移动1px的速率
+*/
+function flutter(area, element, speed) {
+    // 坐标自增自减器
     function shift(target) {
-        var val = 0;
-        var step = 1;
-        var turn = true;
-        return function() {
-            val = val + step*(turn?1:-1);
-            if(val < 0) {
-                turn = true;
-                val = 0;
+        // var step = 1;  // 同时在两个方向移动1px，元素都会晃动很厉害
+        var value = 0;
+        return {
+            turn: true,
+            val: function() {
+                value += (this.turn?1:-1);
+                if(value == 0) this.turn = true;
+                if(value == target) this.turn = false;
+                return value;
             }
-            if(val > target) {
-                turn = false;
-                val = target;
-            }
-            return val;
         };
     }
-    var bdyu = (document.compatMode == "BackCompat") ? document.body : document.documentElement;
-    var gen_x = shift(bdyu.clientWidth-element.offsetWidth);
-    var gen_y = shift(bdyu.clientHeight-element.offsetHeight);
+    var xVal = 0;
+    var yVal = 0;
+    // 活动范围 = 活动区域的可视空间 - 活动元素的占用空间
+    var gen_x = shift(area.clientWidth-element.offsetWidth);
+    var gen_y = shift(area.clientHeight-element.offsetHeight);
     var timer = null;
     var delay = speed || 28;
-    var move = function() {
-        element.style.left = gen_x() + "px";
-        element.style.top = gen_y() + "px";
-        timer = setTimeout(move, delay);
+    var move_G = function() {
+        xVal = gen_x.val();
+        yVal = gen_y.val();
+        element.style.left = xVal + "px";
+        element.style.top = yVal + "px";
+        timer = setTimeout(move_G, delay);
     };
+    // var during = 4;  // 总时长12ms÷间隔3ms
+    // 在1px内再慢放4拍从而减弱晃动感
+    var move_K = function() {
+        var count = 1;
+        var slowmotion = function() {
+            var x_changed = (count/4)*(gen_x.turn?1:-1);
+            var y_changed = (count/4)*(gen_y.turn?1:-1);
+            element.style.left = (xVal+x_changed) + "px";
+            element.style.top = (yVal+y_changed) + "px";
+            if (count < 4) {
+                count++;
+                setTimeout(slowmotion, 3);
+            } else {
+                xVal = gen_x.val();
+                yVal = gen_y.val();
+            }
+        };
+        setTimeout(slowmotion, 3);
+        timer = setTimeout(move_K, delay);
+    };
+    // 速率(delay)超过12ms后选用慢速移动(move_K)，否则选用高速移动(move_G)
+    var picked = (delay>12) ? move_K : move_G;
     element.onmouseenter = function() {
         clearTimeout(timer);
     };
     element.onmouseleave = function() {
-        timer = setTimeout(move, delay);
+        timer = setTimeout(picked, delay);
     };
-    timer = setTimeout(move, delay);
+    timer = setTimeout(picked, delay);
 }
 
+var bdyu = (document.compatMode == "BackCompat") ? document.body : document.documentElement;
 var obju = document.getElementById("adu");
-flutter(obju, 30);
+flutter(bdyu, obju, 22);
 
 var closebtn = obju.children[obju.children.length-1];
 closebtn.onclick = function() {
     obju.parentNode.removeChild(obju);
+    obju = null;
 };
+// 只更改display会触发鼠标移出事件，所以删除DOM元素更有效而且彻底
+
+
 
 
 
