@@ -48,14 +48,16 @@ body {
 }
 
 .notice-hor {
+  position: relative;
   width: 658px;
   height: 28px;
   border: 1px solid #7c7c7c;
+  overflow: hidden;
 }
 .banner1 {
+  position: absolute;
   height: 100%;
   white-space: nowrap;
-  overflow: hidden;
   cursor: default;
 }
 .banner1 > span {
@@ -72,6 +74,7 @@ body {
 }
 
 .notice-ver {
+  position: relative;
   float: right;
   width: 280px;
   height: 200px;
@@ -79,6 +82,7 @@ body {
   overflow: hidden;
 }
 .banner2 {
+  position: absolute;
   width: 100%;
 }
 .banner2 > li {

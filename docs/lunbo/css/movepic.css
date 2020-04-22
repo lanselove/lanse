@@ -106,7 +106,6 @@ body {
   top: 0;
   z-index: 1;
   width: 692px;
-  transform-style: preserve-3d;
 }
 .pics2 > li {
   float: left;
@@ -115,12 +114,12 @@ body {
   margin-top: 27px;
   padding-left: 10px;
   padding-right: 10px;
-  transition: all 0.2s linear;
+  transition: all 0.15s linear;
 }
-/*.pics > li:hover {
-  transform: translateZ(42px);
-  5: 0.36496  300/822
-}*/
+/*
+transform-style: preserve-3d;
+5: 0.36496  300/822
+*/
 .pics2 > li.active {
   width: 232px;
   height: 174px;
